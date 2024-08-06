@@ -54,11 +54,11 @@ const Index = () => {
           </Link>
         </div>
 
-        <div className="mt-16 p-8 rounded-lg relative">
-          <h2 className="text-4xl font-bold mb-8 sticky top-0 bg-gray-100 py-4 z-10">What to choose?</h2>
+        <div className="mt-16 p-8 rounded-lg relative bg-black text-white">
+          <h2 className="text-4xl font-bold mb-8 sticky top-0 bg-black py-4 z-10">What to choose?</h2>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse bg-white">
-              <thead className="sticky top-16 bg-white z-10">
+            <table className="w-full border-collapse bg-black">
+              <thead className="sticky top-16 bg-black z-10">
                 <tr>
                   <th className="w-1/2 text-left py-2 px-4 border border-gray-300">What to choose?</th>
                   <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Veloxforce solutions</th>
@@ -86,9 +86,9 @@ const Index = () => {
 
 const renderCheckmark = (value) => {
   return value ? (
-    <span className="text-green-500">●</span>
+    <span className="text-green-400">●</span>
   ) : (
-    <span className="text-red-500">○</span>
+    <span className="text-red-400">○</span>
   );
 };
 
