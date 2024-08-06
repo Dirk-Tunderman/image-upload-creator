@@ -15,9 +15,11 @@ const ServiceSection = ({ title, description, imageSrc, className, to }) => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-medium mb-2">What can you expect?</h1>
-        <h2 className="text-9xl font-bold text-orange-500 mb-12">Services</h2>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-12">
+        <div className="mb-24">
+          <h1 className="text-4xl font-medium mb-2">What can you expect?</h1>
+          <h2 className="text-9xl font-bold text-orange-500">Services</h2>
+        </div>
         
         <div className="space-y-8 flex flex-col">
           <ServiceSection
