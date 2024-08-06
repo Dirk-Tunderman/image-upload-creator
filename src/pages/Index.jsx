@@ -43,10 +43,10 @@ const Index = () => {
               to="/development"
             />
           </div>
-          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-96 bg-gray-900 text-white cursor-pointer">
-            <img src="/placeholder.svg" alt="Collaboration" className="w-full h-full object-cover absolute inset-0 opacity-50" />
-            <div className="relative z-10 p-8 h-full flex flex-col justify-center">
-              <h3 className="text-3xl font-bold mb-4">Long term collaboration</h3>
+          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-96 bg-black text-white cursor-pointer">
+            <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover absolute inset-0 opacity-70" />
+            <div className="relative z-10 p-8 h-full flex flex-col">
+              <h3 className="text-3xl font-bold mb-2">Long term collaboration</h3>
               <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
             </div>
           </Link>
