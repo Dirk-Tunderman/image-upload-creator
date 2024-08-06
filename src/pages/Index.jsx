@@ -24,7 +24,7 @@ const Index = () => {
             title="Consultation"
             description="Our goal here is to get to know how your business operates, diagnose pain points and start your business needs to take to the next level."
             imageSrc="/placeholder.svg"
-            className="w-full h-96"
+            className="w-full h-[500px]"
             to="/consultation"
           />
           <div className="flex gap-4">
@@ -32,26 +32,28 @@ const Index = () => {
               title="Pre-Development"
               description="Before technology is implemented at a client site, we work with you to develop a strategy to ensure that your business always stays ahead of the curve."
               imageSrc="/placeholder.svg"
-              className="w-1/3 h-96 border-2 border-orange-500 rounded-2xl" // Changed to rounded-3xl
+              className="w-1/3 h-[500px] border-2 border-orange-500 rounded-2xl" // Changed to rounded-3xl
               to="/pre-development"
             />
             <ServiceSection
               title="Development"
               description="In the development phase we will have constant communication to ensure that the project is constructed to your business needs."
               imageSrc="/placeholder.svg"
-              className="w-2/3 h-96 border-2 border-orange-500 rounded-2xl" // Changed to rounded-3xl
+              className="w-2/3 h-[500px] border-2 border-orange-500 rounded-2xl" // Changed to rounded-3xl
               to="/development"
             />
           </div>
-          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-96 bg-black text-white cursor-pointer">
-            <div className="absolute inset-4 overflow-hidden">
-              <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
-            </div>
-            <div className="relative z-10 p-8 h-full flex flex-col">
-              <h3 className="text-3xl font-bold mb-2">Long term collaboration</h3>
-              <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
-            </div>
-          </Link>
+          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer">
+          <div className="absolute inset-x-10 top-28 bottom-10 overflow-hidden"> {/* Modified this line */}
+            <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
+          </div>
+          <div className="relative z-10 p-11 h-full flex flex-col justify-start"> {/* Modified this line */}
+          <div className="-mt-7"> {/* Added this wrapper div */}
+            <h3 className="text-3xl font-bold mb-2">Growth partnership</h3>
+            <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
+          </div>
+        </div>
+        </Link>
         </div>
       </div>
     </div>
