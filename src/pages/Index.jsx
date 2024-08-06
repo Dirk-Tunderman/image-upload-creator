@@ -15,6 +15,7 @@ const ServiceSection = ({ title, description, imageSrc, className, to }) => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100">
+      <CustomScrollbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl font-medium mb-2">What can you expect?</h1>
         <h2 className="text-9xl font-bold text-orange-500 mb-12">Services</h2>
@@ -68,7 +69,10 @@ const Index = () => {
                   <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Hiring more employees</th>
                 </tr>
               </thead>
-              <tbody className="overflow-y-auto" style={{ height: '350px', display: 'block' }}>
+            </table>
+            <div className="overflow-y-auto custom-scrollbar" style={{ height: '350px' }}>
+              <table className="w-full border-collapse">
+                <tbody>
                 {tableData.map((row, index) => (
                   <tr key={index}>
                     <td className="py-2 px-4 border border-gray-700">{row.description}</td>
@@ -77,14 +81,33 @@ const Index = () => {
                     <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.hiring)}</td>
                   </tr>
                 ))}
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+const CustomScrollbar = () => (
+  <style jsx global>{`
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #1a1a1a;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #4a4a4a;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #5a5a5a;
+    }
+  `}</style>
+);
 
 const renderCheckmark = (value) => {
   return value ? (
