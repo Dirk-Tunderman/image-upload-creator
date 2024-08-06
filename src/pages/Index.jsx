@@ -58,9 +58,9 @@ const Index = () => {
 
         <div className="mt-16 bg-black text-white p-8 rounded-lg">
           <h2 className="text-4xl font-bold mb-8">What to choose ?</h2>
-          <div className="overflow-x-auto">
+          <div className="relative overflow-hidden" style={{ height: '400px' }}>
             <table className="w-full border-collapse">
-              <thead>
+              <thead className="sticky top-0 bg-black z-10">
                 <tr>
                   <th className="w-1/2 text-left py-2 px-4 border border-gray-700">What to choose ?</th>
                   <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Veloxforce solutions</th>
@@ -68,7 +68,7 @@ const Index = () => {
                   <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Hiring more employees</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="overflow-y-auto" style={{ height: '350px', display: 'block' }}>
                 {tableData.map((row, index) => (
                   <tr key={index}>
                     <td className="py-2 px-4 border border-gray-700">{row.description}</td>
@@ -102,28 +102,88 @@ const tableData = [
     hiring: false,
   },
   {
-    description: "Veloxforce solutions provides a competitive advantage by enabling unique, value-adding features that differentiate the company, attracting more customers and driving revenue growth.",
+    description: "Provides a competitive advantage by enabling unique, value-adding features that differentiate the company.",
     veloxforce: true,
     regular: false,
     hiring: false,
   },
   {
-    description: "Build a one-size-fits-all approach limits customization, leaving businesses to adapt their processes to software constraints, leading to inefficiencies and reduced productivity.",
+    description: "Customizable solutions tailored to your specific business needs and processes.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "Seamless integration with existing workflows, automating data transfer and synchronization.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "Scalable solutions that grow with your business without significant additional costs.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "Continuous updates and improvements based on industry trends and client feedback.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "Dedicated support team familiar with your specific implementation.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "One-size-fits-all approach limiting customization and efficiency.",
     veloxforce: false,
     regular: true,
     hiring: false,
   },
   {
-    description: "Hiring more employees to compensate for inefficiencies leads to increased salaries and overhead costs, reducing profit margins and limiting investment in innovation.",
+    description: "Businesses need to adapt their processes to software constraints.",
+    veloxforce: false,
+    regular: true,
+    hiring: false,
+  },
+  {
+    description: "Limited integration capabilities with existing systems.",
+    veloxforce: false,
+    regular: true,
+    hiring: false,
+  },
+  {
+    description: "Increased salaries and overhead costs.",
     veloxforce: false,
     regular: false,
     hiring: true,
   },
   {
-    description: "Veloxforce solutions seamlessly integrate with existing workflows, automating data transfer and synchronization, reducing errors and increasing efficiency and productivity.",
-    veloxforce: true,
+    description: "Reduced profit margins due to higher operational costs.",
+    veloxforce: false,
     regular: false,
-    hiring: false,
+    hiring: true,
+  },
+  {
+    description: "Limited investment in innovation due to higher personnel costs.",
+    veloxforce: false,
+    regular: false,
+    hiring: true,
+  },
+  {
+    description: "Potential inconsistencies in processes and data management.",
+    veloxforce: false,
+    regular: false,
+    hiring: true,
+  },
+  {
+    description: "Challenges in maintaining consistent quality across a larger workforce.",
+    veloxforce: false,
+    regular: false,
+    hiring: true,
   },
 ];
 
