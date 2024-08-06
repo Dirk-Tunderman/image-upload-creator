@@ -123,6 +123,36 @@ const tableData = [
     regular: false,
     hiring: false,
   },
+  {
+    description: "DOES YOUR SOFTWARE ADAPT TO YOUR BUSINESS NEEDS, OR ARE YOU ADAPTING TO YOUR SOFTWARE?",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "Veloxforce solutions are tailored to your specific business processes, ensuring optimal efficiency and effectiveness in your operations.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
+  {
+    description: "Off-the-shelf software often requires businesses to change their processes to fit the software, potentially disrupting established workflows.",
+    veloxforce: false,
+    regular: true,
+    hiring: false,
+  },
+  {
+    description: "Adding more staff doesn't address underlying inefficiencies in your software systems, potentially exacerbating existing problems.",
+    veloxforce: false,
+    regular: false,
+    hiring: true,
+  },
+  {
+    description: "Veloxforce solutions offer scalability, growing with your business without the need for constant software replacements or upgrades.",
+    veloxforce: true,
+    regular: false,
+    hiring: false,
+  },
 ];
 
 export default Index;
