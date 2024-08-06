@@ -56,25 +56,25 @@ const Index = () => {
         </Link>
         </div>
 
-        <div className="mt-16 p-8 rounded-lg relative">
-          <h2 className="text-4xl font-bold mb-8 sticky top-0 bg-gray-100 py-4 z-10">What to choose?</h2>
+        <div className="mt-16 bg-black text-white p-8 rounded-lg">
+          <h2 className="text-4xl font-bold mb-8">What to choose ?</h2>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse bg-white">
-              <thead className="sticky top-16 bg-white z-10">
+            <table className="w-full border-collapse">
+              <thead>
                 <tr>
-                  <th className="w-1/2 text-left py-2 px-4 border border-gray-300">What to choose?</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Veloxforce solutions</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Regular software</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Hiring more employees</th>
+                  <th className="w-1/2 text-left py-2 px-4 border border-gray-700">What to choose ?</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Veloxforce solutions</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Regular software</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Hiring more employees</th>
                 </tr>
               </thead>
               <tbody>
                 {tableData.map((row, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-4 border border-gray-300">{row.description}</td>
-                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.veloxforce)}</td>
-                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.regular)}</td>
-                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.hiring)}</td>
+                    <td className="py-2 px-4 border border-gray-700">{row.description}</td>
+                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.veloxforce)}</td>
+                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.regular)}</td>
+                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.hiring)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -88,9 +88,9 @@ const Index = () => {
 
 const renderCheckmark = (value) => {
   return value ? (
-    <span className="text-green-500">●</span>
+    <span className="text-orange-500">●</span>
   ) : (
-    <span className="text-red-500">○</span>
+    <span className="text-gray-500">○</span>
   );
 };
 
