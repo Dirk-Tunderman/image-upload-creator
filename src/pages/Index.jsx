@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 
 const ServiceSection = ({ title, description, imageSrc, className }) => (
   <div className={`relative overflow-hidden ${className}`}>
