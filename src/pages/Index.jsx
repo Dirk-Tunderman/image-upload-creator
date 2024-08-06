@@ -44,16 +44,13 @@ const Index = () => {
             />
           </div>
           <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer">
-          <div className="absolute inset-x-10 top-28 bottom-10 overflow-hidden"> {/* Modified this line */}
-            <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
-          </div>
-          <div className="relative z-10 p-11 h-full flex flex-col justify-start"> {/* Modified this line */}
-          <div className="-mt-7"> {/* Added this wrapper div */}
-            <h3 className="text-3xl font-bold mb-2">Growth partnership</h3>
-            <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
-          </div>
-        </div>
-        </Link>
+            <div className="p-11 h-full flex flex-col justify-start">
+              <div>
+                <h3 className="text-4xl font-bold mb-4">Growth partnership</h3>
+                <p className="text-2xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
+              </div>
+            </div>
+          </Link>
         </div>
 
         <div className="mt-16 p-8 rounded-lg relative">
