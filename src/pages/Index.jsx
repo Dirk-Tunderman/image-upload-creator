@@ -15,11 +15,9 @@ const ServiceSection = ({ title, description, imageSrc, className, to }) => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-12">
-        <div className="mb-24">
-          <h1 className="text-4xl font-medium mb-2">What can you expect?</h1>
-          <h2 className="text-9xl font-bold text-orange-500">Services</h2>
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-4xl font-medium mb-2">What can you expect?</h1>
+        <h2 className="text-9xl font-bold text-orange-500 mb-12">Services</h2>
         
         <div className="space-y-8 flex flex-col">
           <ServiceSection
@@ -46,9 +44,7 @@ const Index = () => {
             />
           </div>
           <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-96 bg-black text-white cursor-pointer">
-            <div className="absolute inset-4 overflow-hidden">
-              <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
-            </div>
+            <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover absolute inset-0 opacity-70" />
             <div className="relative z-10 p-8 h-full flex flex-col">
               <h3 className="text-3xl font-bold mb-2">Long term collaboration</h3>
               <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
