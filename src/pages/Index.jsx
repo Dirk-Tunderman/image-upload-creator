@@ -16,17 +16,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-5xl font-bold mb-2">What can you expect?</h1>
-        <h2 className="text-9xl font-bold text-orange-500 mb-12">Services</h2>
+        <h1 className="text-4xl font-bold mb-2">What can you expect?</h1>
+        <h2 className="text-8xl font-bold text-orange-500 mb-12">Services</h2>
         
         <div className="space-y-8">
+          <ServiceSection
+            title="Consultation"
+            description="Our goal here is to get to know how your business operates, diagnose pain points and start your business needs to take to the next level."
+            imageSrc="/placeholder.svg"
+            className="w-full h-96"
+          />
           <div className="flex gap-8 h-96">
-            <ServiceSection
-              title="Consultation"
-              description="Our goal here is to get to know how your business operates, diagnose pain points and start your business needs to take to the next level."
-              imageSrc="/placeholder.svg"
-              className="w-1/3"
-            />
             <ServiceSection
               title="Pre-Development"
               description="Before technology is implemented at a client site, we work with you to develop a strategy to ensure that your business always stays ahead of the curve."
@@ -37,7 +37,7 @@ const Index = () => {
               title="Development"
               description="In the development phase we will have constant communication to ensure that the project is constructed to your business needs."
               imageSrc="/placeholder.svg"
-              className="w-1/3"
+              className="w-2/3"
             />
           </div>
           <div className="relative overflow-hidden w-full h-96 bg-gray-900 text-white">
