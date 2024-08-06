@@ -20,38 +20,36 @@ const Index = () => {
         <h2 className="text-8xl font-bold text-orange-500 mb-12">Services</h2>
         
         <div className="space-y-8">
+          <ServiceSection
+            title="Consultation"
+            description="Our goal here is to get to know how your business operates, diagnose pain points and start your business needs to take to the next level."
+            imageSrc="/placeholder.svg"
+            className="w-full h-96"
+            to="/consultation"
+          />
           <div className="flex gap-8 h-96">
-            <ServiceSection
-              title="Consultation"
-              description="Our goal here is to get to know how your business operates, diagnose pain points and start your business needs to take to the next level."
-              imageSrc="/placeholder.svg"
-              className="w-1/2"
-              to="/consultation"
-            />
             <ServiceSection
               title="Pre-Development"
               description="Before technology is implemented at a client site, we work with you to develop a strategy to ensure that your business always stays ahead of the curve."
               imageSrc="/placeholder.svg"
-              className="w-1/2"
+              className="w-1/3"
               to="/pre-development"
             />
-          </div>
-          <div className="flex gap-8 h-96">
             <ServiceSection
               title="Development"
               description="In the development phase we will have constant communication to ensure that the project is constructed to your business needs."
               imageSrc="/placeholder.svg"
-              className="w-1/2"
+              className="w-2/3"
               to="/development"
             />
-            <ServiceSection
-              title="Long term collaboration"
-              description="We provide a better experience for your website and digital marketing needs with long-term thinking."
-              imageSrc="/placeholder.svg"
-              className="w-1/2"
-              to="/long-term-collaboration"
-            />
           </div>
+          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-96 bg-gray-900 text-white cursor-pointer">
+            <img src="/placeholder.svg" alt="Collaboration" className="w-full h-full object-cover absolute inset-0 opacity-50" />
+            <div className="relative z-10 p-8 h-full flex flex-col justify-center">
+              <h3 className="text-3xl font-bold mb-4">Long term collaboration</h3>
+              <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
