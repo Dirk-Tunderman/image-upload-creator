@@ -32,14 +32,14 @@ const Index = () => {
               title="Pre-Development"
               description="Before technology is implemented at a client site, we work with you to develop a strategy to ensure that your business always stays ahead of the curve."
               imageSrc="/placeholder.svg"
-              className="w-1/3 h-96"
+              className="w-1/3 h-96 border-4 border-orange-500"
               to="/pre-development"
             />
             <ServiceSection
               title="Development"
               description="In the development phase we will have constant communication to ensure that the project is constructed to your business needs."
               imageSrc="/placeholder.svg"
-              className="w-2/3 h-96"
+              className="w-2/3 h-96 border-4 border-orange-500"
               to="/development"
             />
           </div>
