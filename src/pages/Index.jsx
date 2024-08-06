@@ -15,7 +15,6 @@ const ServiceSection = ({ title, description, imageSrc, className, to }) => (
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <CustomScrollbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl font-medium mb-2">What can you expect?</h1>
         <h2 className="text-9xl font-bold text-orange-500 mb-12">Services</h2>
@@ -45,45 +44,39 @@ const Index = () => {
             />
           </div>
           <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer">
-          <div className="absolute inset-x-10 top-28 bottom-10 overflow-hidden"> {/* Modified this line */}
-            <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
-          </div>
-          <div className="relative z-10 p-11 h-full flex flex-col justify-start"> {/* Modified this line */}
-          <div className="-mt-7"> {/* Added this wrapper div */}
-            <h3 className="text-3xl font-bold mb-2">Growth partnership</h3>
-            <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
-          </div>
-        </div>
-        </Link>
+            <div className="absolute inset-0 overflow-hidden">
+              <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-30" />
+            </div>
+            <div className="relative z-10 p-11 h-full flex flex-col justify-center">
+              <h3 className="text-4xl font-bold mb-4">Growth partnership</h3>
+              <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
+            </div>
+          </Link>
         </div>
 
-        <div className="mt-16 bg-black text-white p-8 rounded-lg">
-          <h2 className="text-4xl font-bold mb-8">What to choose ?</h2>
-          <div className="relative overflow-hidden" style={{ height: '400px' }}>
-            <table className="w-full border-collapse">
-              <thead className="sticky top-0 bg-black z-10">
+        <div className="mt-16 p-8 rounded-lg relative">
+          <h2 className="text-4xl font-bold mb-8 sticky top-0 bg-gray-100 py-4 z-10">What to choose?</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse bg-white">
+              <thead className="sticky top-16 bg-white z-10">
                 <tr>
-                  <th className="w-1/2 text-left py-2 px-4 border border-gray-700">What to choose ?</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Veloxforce solutions</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Regular software</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Hiring more employees</th>
+                  <th className="w-1/2 text-left py-2 px-4 border border-gray-300">What to choose?</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Veloxforce solutions</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Regular software</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Hiring more employees</th>
                 </tr>
               </thead>
-            </table>
-            <div className="overflow-y-auto custom-scrollbar" style={{ height: '350px' }}>
-              <table className="w-full border-collapse">
-                <tbody>
+              <tbody>
                 {tableData.map((row, index) => (
                   <tr key={index}>
-                    <td className="py-2 px-4 border border-gray-700">{row.description}</td>
-                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.veloxforce)}</td>
-                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.regular)}</td>
-                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.hiring)}</td>
+                    <td className="py-2 px-4 border border-gray-300">{row.description}</td>
+                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.veloxforce)}</td>
+                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.regular)}</td>
+                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.hiring)}</td>
                   </tr>
                 ))}
-                </tbody>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -91,29 +84,11 @@ const Index = () => {
   );
 };
 
-const CustomScrollbar = () => (
-  <style jsx global>{`
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 8px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #1a1a1a;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #4a4a4a;
-      border-radius: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background-color: #5a5a5a;
-    }
-  `}</style>
-);
-
 const renderCheckmark = (value) => {
   return value ? (
-    <span className="text-orange-500">●</span>
+    <span className="text-green-500">●</span>
   ) : (
-    <span className="text-gray-500">○</span>
+    <span className="text-red-500">○</span>
   );
 };
 
@@ -125,88 +100,28 @@ const tableData = [
     hiring: false,
   },
   {
-    description: "Provides a competitive advantage by enabling unique, value-adding features that differentiate the company.",
+    description: "Veloxforce solutions provides a competitive advantage by enabling unique, value-adding features that differentiate the company, attracting more customers and driving revenue growth.",
     veloxforce: true,
     regular: false,
     hiring: false,
   },
   {
-    description: "Customizable solutions tailored to your specific business needs and processes.",
-    veloxforce: true,
-    regular: false,
-    hiring: false,
-  },
-  {
-    description: "Seamless integration with existing workflows, automating data transfer and synchronization.",
-    veloxforce: true,
-    regular: false,
-    hiring: false,
-  },
-  {
-    description: "Scalable solutions that grow with your business without significant additional costs.",
-    veloxforce: true,
-    regular: false,
-    hiring: false,
-  },
-  {
-    description: "Continuous updates and improvements based on industry trends and client feedback.",
-    veloxforce: true,
-    regular: false,
-    hiring: false,
-  },
-  {
-    description: "Dedicated support team familiar with your specific implementation.",
-    veloxforce: true,
-    regular: false,
-    hiring: false,
-  },
-  {
-    description: "One-size-fits-all approach limiting customization and efficiency.",
+    description: "Build a one-size-fits-all approach limits customization, leaving businesses to adapt their processes to software constraints, leading to inefficiencies and reduced productivity.",
     veloxforce: false,
     regular: true,
     hiring: false,
   },
   {
-    description: "Businesses need to adapt their processes to software constraints.",
+    description: "Hiring more employees to compensate for inefficiencies leads to increased salaries and overhead costs, reducing profit margins and limiting investment in innovation.",
     veloxforce: false,
-    regular: true,
+    regular: false,
+    hiring: true,
+  },
+  {
+    description: "Veloxforce solutions seamlessly integrate with existing workflows, automating data transfer and synchronization, reducing errors and increasing efficiency and productivity.",
+    veloxforce: true,
+    regular: false,
     hiring: false,
-  },
-  {
-    description: "Limited integration capabilities with existing systems.",
-    veloxforce: false,
-    regular: true,
-    hiring: false,
-  },
-  {
-    description: "Increased salaries and overhead costs.",
-    veloxforce: false,
-    regular: false,
-    hiring: true,
-  },
-  {
-    description: "Reduced profit margins due to higher operational costs.",
-    veloxforce: false,
-    regular: false,
-    hiring: true,
-  },
-  {
-    description: "Limited investment in innovation due to higher personnel costs.",
-    veloxforce: false,
-    regular: false,
-    hiring: true,
-  },
-  {
-    description: "Potential inconsistencies in processes and data management.",
-    veloxforce: false,
-    regular: false,
-    hiring: true,
-  },
-  {
-    description: "Challenges in maintaining consistent quality across a larger workforce.",
-    veloxforce: false,
-    regular: false,
-    hiring: true,
   },
 ];
 
