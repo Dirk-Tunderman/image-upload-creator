@@ -59,31 +59,26 @@ const Index = () => {
         <div className="mt-16 bg-black text-white p-8 rounded-lg">
           <h2 className="text-4xl font-bold mb-8">What to choose ?</h2>
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full border-collapse">
               <thead>
-                <tr className="border-b border-gray-700">
-                  <th className="text-left py-2">What to choose ?</th>
-                  <th className="text-center py-2">Veloxforce solutions</th>
-                  <th className="text-center py-2">Regular software</th>
-                  <th className="text-center py-2">Hiring more employees</th>
+                <tr>
+                  <th className="w-1/2 text-left py-2 px-4 border border-gray-700">What to choose ?</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Veloxforce solutions</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Regular software</th>
+                  <th className="w-1/6 text-center py-2 px-4 border border-gray-700">Hiring more employees</th>
                 </tr>
               </thead>
               <tbody>
                 {tableData.map((row, index) => (
-                  <tr key={index} className="border-b border-gray-700">
-                    <td className="py-2">{row.description}</td>
-                    <td className="text-center">{renderCheckmark(row.veloxforce)}</td>
-                    <td className="text-center">{renderCheckmark(row.regular)}</td>
-                    <td className="text-center">{renderCheckmark(row.hiring)}</td>
+                  <tr key={index}>
+                    <td className="py-2 px-4 border border-gray-700">{row.description}</td>
+                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.veloxforce)}</td>
+                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.regular)}</td>
+                    <td className="text-center py-2 px-4 border border-gray-700">{renderCheckmark(row.hiring)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
-          <div className="mt-4 text-center">
-            <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black">
-              SHOW MORE +
-            </Button>
           </div>
         </div>
       </div>
