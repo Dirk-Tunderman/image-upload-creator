@@ -43,7 +43,7 @@ const Index = () => {
               to="/development"
             />
           </div>
-          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer">
+          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-orange-500 text-white cursor-pointer rounded-2xl">
             <div className="p-11 h-full flex flex-col justify-start">
               <div>
                 <h3 className="text-4xl font-bold mb-4">Growth partnership</h3>
