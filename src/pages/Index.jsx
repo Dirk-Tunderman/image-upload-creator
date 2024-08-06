@@ -56,9 +56,9 @@ const Index = () => {
 
         <div className="mt-16 p-8 rounded-lg relative bg-black text-white">
           <h2 className="text-4xl font-bold mb-8 sticky top-0 bg-black py-4 z-10">What to choose?</h2>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto max-h-[500px] scrollbar-hide">
             <table className="w-full border-collapse bg-black">
-              <thead className="sticky top-16 bg-black z-10">
+              <thead className="sticky top-0 bg-black z-10">
                 <tr>
                   <th className="w-1/2 text-left py-2 px-4 border border-gray-300">What to choose?</th>
                   <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Veloxforce solutions</th>
