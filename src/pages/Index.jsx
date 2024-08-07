@@ -95,26 +95,23 @@ const TableComponent = ({ tableData }) => {
         const viewportCenterY = viewportHeight / 2;
 
         const newOpacities = tableData.map((_, index) => {
+          // Always keep first and last rows fully visible
+          if (index === 0 || index === tableData.length - 1) {
+            return 1;
+          }
+
           const rowElement = tableRef.current.querySelector(`tr:nth-child(${index + 2})`); // +2 to skip header
           if (rowElement) {
             const rowRect = rowElement.getBoundingClientRect();
             const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
             const distanceFromCenter = Math.abs(rowCenterY - viewportCenterY);
             
-            // Make the last row always fully visible
-            if (index === tableData.length - 1) {
-              return 1;
-            }
-            
             // Calculate opacity based on distance from center
-            const maxDistance = viewportHeight / 4; // Reduced from viewportHeight / 2
+            const maxDistance = viewportHeight / 2;
             let opacity = 1 - (distanceFromCenter / maxDistance);
             
-            // Adjust opacity values
-            if (opacity > 0.9) opacity = 1;
-            else if (opacity > 0.7) opacity = 0.9;
-            else if (opacity > 0.5) opacity = 0.7;
-            else opacity = 0.5;
+            // Clamp opacity between 0.5 and 1
+            opacity = Math.max(0.5, Math.min(1, opacity));
             
             return opacity;
           }
