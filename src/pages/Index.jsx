@@ -71,7 +71,7 @@ const Index = () => {
                 </thead>
                 <tbody>
                   {tableData.map((row, index) => (
-                    <TableRow key={index} row={row} />
+                    <TableRow key={index} row={row} index={index} totalRows={tableData.length} />
                   ))}
                 </tbody>
               </table>
@@ -82,52 +82,23 @@ const Index = () => {
   );
 };
 
-const useVisibilityHook = (ref) => {
-  const [visibility, setVisibility] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const intersectionRatio = entry.intersectionRatio;
-        setVisibility(intersectionRatio);
-      },
-      {
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-      }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [ref]);
-
-  return visibility;
-};
-
-const TableRow = ({ row }) => {
-  const rowRef = useRef(null);
-  const visibility = useVisibilityHook(rowRef);
-
-  const getOpacity = (visibility) => {
-    if (visibility >= 0.9) return 1;
-    if (visibility >= 0.7) return 0.9;
-    if (visibility >= 0.5) return 0.7;
-    if (visibility >= 0.3) return 0.5;
+const TableRow = ({ row, index, totalRows }) => {
+  const getOpacity = (index, totalRows) => {
+    const middleIndex = Math.floor(totalRows / 2);
+    const distance = Math.abs(index - middleIndex);
+    
+    if (distance === 0) return 1;
+    if (distance === 1) return 0.9;
+    if (distance === 2) return 0.7;
+    if (distance === 3) return 0.5;
     return 0.3;
   };
 
   return (
     <tr
-      ref={rowRef}
       className="border border-gray-700 bg-black"
       style={{
-        opacity: getOpacity(visibility),
+        opacity: getOpacity(index, totalRows),
         transition: "opacity 0.3s ease-in-out",
       }}
     >
