@@ -62,16 +62,16 @@ const Index = () => {
             <div className="overflow-x-auto max-h-[500px] scrollbar-hide">
               <table className="w-full border-collapse">
                 <thead className="sticky top-0 z-10">
-                  <tr>
-                    <th className="w-1/2 text-left py-2 px-4 bg-black"></th>
-                    <th className="w-1/6 text-center py-2 px-4 bg-black">Veloxforce solutions</th>
-                    <th className="w-1/6 text-center py-2 px-4 bg-black">Regular software</th>
-                    <th className="w-1/6 text-center py-2 px-4 bg-black">Hiring more employees</th>
+                  <tr className="bg-black">
+                    <th className="w-1/2 text-left py-2 px-4"></th>
+                    <th className="w-1/6 text-center py-2 px-4">Veloxforce solutions</th>
+                    <th className="w-1/6 text-center py-2 px-4">Regular software</th>
+                    <th className="w-1/6 text-center py-2 px-4">Hiring more employees</th>
                   </tr>
                 </thead>
                 <tbody>
                   {tableData.map((row, index) => (
-                    <TableRow key={index} row={row} index={index} />
+                    <TableRow key={index} row={row} />
                   ))}
                 </tbody>
               </table>
@@ -107,25 +107,23 @@ const useVisibilityHook = (ref) => {
   return isVisible;
 };
 
-const TableRow = ({ row, index }) => {
+const TableRow = ({ row }) => {
   const rowRef = useRef(null);
   const isVisible = useVisibilityHook(rowRef);
-
-  const isFirstRow = index === 0;
-  const rowClass = isFirstRow ? "bg-black" : "border border-gray-700 bg-black";
 
   return (
     <tr
       ref={rowRef}
+      className="border border-gray-700 bg-black"
       style={{
         opacity: isVisible ? 1 : 0,
         transition: "opacity 0.5s ease-in-out",
       }}
     >
-      <td className={`py-2 px-4 ${rowClass}`}>{row.description}</td>
-      <td className={`text-center py-2 px-4 ${rowClass}`}>{renderCheckmark(row.veloxforce)}</td>
-      <td className={`text-center py-2 px-4 ${rowClass}`}>{renderCheckmark(row.regular)}</td>
-      <td className={`text-center py-2 px-4 ${rowClass}`}>{renderCheckmark(row.hiring)}</td>
+      <td className="py-2 px-4">{row.description}</td>
+      <td className="text-center py-2 px-4">{renderCheckmark(row.veloxforce)}</td>
+      <td className="text-center py-2 px-4">{renderCheckmark(row.regular)}</td>
+      <td className="text-center py-2 px-4">{renderCheckmark(row.hiring)}</td>
     </tr>
   );
 };
