@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-
 import { Link } from "react-router-dom";
 
 const ServiceSection = ({ title, description, imageSrc, className, to }) => (
@@ -32,54 +31,57 @@ const Index = () => {
               title="Pre-Development"
               description="Before technology is implemented at a client site, we work with you to develop a strategy to ensure that your business always stays ahead of the curve."
               imageSrc="/placeholder.svg"
-              className="w-1/3 h-[500px] border-2 border-orange-500 rounded-2xl" // Changed to rounded-3xl
+              className="w-1/3 h-[500px] border-2 border-orange-500 rounded-2xl"
               to="/pre-development"
             />
             <ServiceSection
               title="Development"
               description="In the development phase we will have constant communication to ensure that the project is constructed to your business needs."
               imageSrc="/placeholder.svg"
-              className="w-2/3 h-[500px] border-2 border-orange-500 rounded-2xl" // Changed to rounded-3xl
+              className="w-2/3 h-[500px] border-2 border-orange-500 rounded-2xl"
               to="/development"
             />
           </div>
           <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer">
-            <div className="absolute inset-0 overflow-hidden">
-              <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-30" />
+            <div className="absolute inset-x-8 top-32 bottom-8 overflow-hidden">
+              <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
             </div>
-            <div className="relative z-10 p-11 h-full flex flex-col justify-center">
-              <h3 className="text-4xl font-bold mb-4">Growth partnership</h3>
-              <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
+            <div className="relative z-10 p-8 h-full flex flex-col justify-start">
+              <div className="-mt-[18px]">
+                <h3 className="text-3xl font-bold mb-2">Long term collaboration</h3>
+                <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
+              </div>
             </div>
           </Link>
         </div>
-
-        <div className="mt-16 p-8 rounded-lg relative bg-black text-white">
-          <h2 className="text-4xl font-bold mb-8 sticky top-0 bg-black py-4 z-10">What to choose?</h2>
-          <div className="overflow-x-auto max-h-[500px] scrollbar-hide">
-            <table className="w-full border-collapse bg-black">
-              <thead className="sticky top-0 bg-black z-10">
-                <tr>
-                  <th className="w-1/2 text-left py-2 px-4 border border-gray-300">What to choose?</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Veloxforce solutions</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Regular software</th>
-                  <th className="w-1/6 text-center py-2 px-4 border border-gray-300">Hiring more employees</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((row, index) => (
-                  <tr key={index}>
-                    <td className="py-2 px-4 border border-gray-300">{row.description}</td>
-                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.veloxforce)}</td>
-                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.regular)}</td>
-                    <td className="text-center py-2 px-4 border border-gray-300">{renderCheckmark(row.hiring)}</td>
+      </div>
+    <div className="mt-16 ">
+          <div className="bg-black text-white rounded-lg overflow-hidden ">
+            <h2 className="text-4xl font-bold p-8 sticky top-0 bg-black z-20">What to choose?</h2>
+            <div className="overflow-x-auto max-h-[500px] scrollbar-hide">
+              <table className="w-full border-collapse">
+                <thead className="sticky top-0 z-10">
+                  <tr>
+                    <th className="w-1/2 text-left py-2 px-4 border border-gray-700 bg-black"></th>
+                    <th className="w-1/6 text-center py-2 px-4 border border-gray-700 bg-black">Veloxforce solutions</th>
+                    <th className="w-1/6 text-center py-2 px-4 border border-gray-700 bg-black">Regular software</th>
+                    <th className="w-1/6 text-center py-2 px-4 border border-gray-700 bg-black">Hiring more employees</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {tableData.map((row, index) => (
+                    <tr key={index}>
+                      <td className="py-2 px-4 border border-gray-700 bg-black">{row.description}</td>
+                      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.veloxforce)}</td>
+                      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.regular)}</td>
+                      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.hiring)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
