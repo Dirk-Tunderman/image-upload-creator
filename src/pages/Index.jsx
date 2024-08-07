@@ -83,14 +83,17 @@ const Index = () => {
 };
 
 const useVisibilityHook = (ref) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visibility, setVisibility] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        const intersectionRatio = entry.intersectionRatio;
+        setVisibility(intersectionRatio);
       },
-      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      }
     );
 
     if (ref.current) {
@@ -104,20 +107,28 @@ const useVisibilityHook = (ref) => {
     };
   }, [ref]);
 
-  return isVisible;
+  return visibility;
 };
 
 const TableRow = ({ row }) => {
   const rowRef = useRef(null);
-  const isVisible = useVisibilityHook(rowRef);
+  const visibility = useVisibilityHook(rowRef);
+
+  const getOpacity = (visibility) => {
+    if (visibility >= 0.9) return 1;
+    if (visibility >= 0.7) return 0.9;
+    if (visibility >= 0.5) return 0.7;
+    if (visibility >= 0.3) return 0.5;
+    return 0.3;
+  };
 
   return (
     <tr
       ref={rowRef}
       className="border border-gray-700 bg-black"
       style={{
-        opacity: isVisible ? 1 : 0,
-        transition: "opacity 0.5s ease-in-out",
+        opacity: getOpacity(visibility),
+        transition: "opacity 0.3s ease-in-out",
       }}
     >
       <td className="py-2 px-4">{row.description}</td>
