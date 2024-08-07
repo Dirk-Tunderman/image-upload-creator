@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
-const ServiceSection = ({ title, description, imageSrc, className, to }) => (
+const ServiceSection = ({ title, description, imageSrc, className, to, direction }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: false,
+    threshold: 0.1,
+  });
+
+  const variants = {
+    hidden: { opacity: 0, x: direction === 'left' ? -50 : 50 },
+    visible: { opacity: 1, x: 0 },
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={variants}
+      transition={{ duration: 0.5 }}
+    >
   <Link to={to} className={`relative overflow-hidden ${className} cursor-pointer`}>
     <img src={imageSrc} alt={title} className="w-full h-full object-cover absolute inset-0" />
     <div className="relative z-10 p-8 h-full flex flex-col">
@@ -26,6 +45,7 @@ const Index = () => {
             imageSrc="/placeholder.svg"
             className="w-full h-[500px]"
             to="/consultation"
+            direction="left"
           />
           <div className="flex gap-4">
             <ServiceSection
@@ -34,6 +54,7 @@ const Index = () => {
               imageSrc="/placeholder.svg"
               className="w-1/3 h-[500px] border-2 border-orange-500 rounded-2xl"
               to="/pre-development"
+              direction="left"
             />
             <ServiceSection
               title="Development"
@@ -41,9 +62,17 @@ const Index = () => {
               imageSrc="/placeholder.svg"
               className="w-2/3 h-[500px] border-2 border-orange-500 rounded-2xl"
               to="/development"
+              direction="right"
             />
           </div>
-          <Link to="/long-term-collaboration" className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer">
+          <ServiceSection
+            title="Long Term Collaboration"
+            description="We provide a better experience for your website and digital marketing needs with long-term thinking."
+            imageSrc="/testbackground.jpg"
+            className="relative overflow-hidden w-full h-[500px] bg-black text-white cursor-pointer"
+            to="/long-term-collaboration"
+            direction="right"
+          >
             <div className="absolute inset-x-8 top-32 bottom-8 overflow-hidden">
               <img src="/testbackground.jpg" alt="Collaboration" className="w-full h-full object-cover opacity-70" />
             </div>
@@ -53,7 +82,7 @@ const Index = () => {
                 <p className="text-xl">We provide a better experience for your website and digital marketing needs with long-term thinking.</p>
               </div>
             </div>
-          </Link>
+          </ServiceSection>
         </div>
       </div>
     <div className="mt-16 ">
