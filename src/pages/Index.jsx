@@ -59,46 +59,19 @@ const Index = () => {
     <div className="mt-16 ">
           <div className="bg-black text-white rounded-lg overflow-hidden ">
             <h2 className="text-4xl font-bold p-8 sticky top-0 bg-black z-20">What to choose?</h2>
-            <div className="overflow-x-auto max-h-[500px] scrollbar-hide">
-              <table className="w-full border-collapse">
-                <thead className="sticky top-0 z-10">
-                  <tr className="bg-black">
-                    <th className="w-1/2 text-left py-2 px-4"></th>
-                    <th className="w-1/6 text-center py-2 px-4">Veloxforce solutions</th>
-                    <th className="w-1/6 text-center py-2 px-4">Regular software</th>
-                    <th className="w-1/6 text-center py-2 px-4">Hiring more employees</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {tableData.map((row, index) => (
-                    <TableRow key={index} row={row} index={index} totalRows={tableData.length} />
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <TableComponent tableData={tableData} />
           </div>
         </div>
     </div>
   );
 };
 
-const TableRow = ({ row, index, totalRows }) => {
-  const getOpacity = (index, totalRows) => {
-    const middleIndex = Math.floor(totalRows / 2);
-    const distance = Math.abs(index - middleIndex);
-    
-    if (distance === 0) return 1;
-    if (distance === 1) return 0.9;
-    if (distance === 2) return 0.7;
-    if (distance === 3) return 0.5;
-    return 0.3;
-  };
-
+const TableRow = ({ row, index, opacity }) => {
   return (
     <tr
       className="border border-gray-700 bg-black"
       style={{
-        opacity: getOpacity(index, totalRows),
+        opacity: opacity,
         transition: "opacity 0.3s ease-in-out",
       }}
     >
@@ -107,6 +80,61 @@ const TableRow = ({ row, index, totalRows }) => {
       <td className="text-center py-2 px-4">{renderCheckmark(row.regular)}</td>
       <td className="text-center py-2 px-4">{renderCheckmark(row.hiring)}</td>
     </tr>
+  );
+};
+
+const TableComponent = ({ tableData }) => {
+  const [rowOpacities, setRowOpacities] = useState(tableData.map(() => 1));
+  const tableRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (tableRef.current) {
+        const tableRect = tableRef.current.getBoundingClientRect();
+        const tableCenterY = (tableRect.top + tableRect.bottom) / 2;
+        const viewportHeight = window.innerHeight;
+
+        const newOpacities = tableData.map((_, index) => {
+          const rowElement = tableRef.current.querySelector(`tr:nth-child(${index + 1})`);
+          if (rowElement) {
+            const rowRect = rowElement.getBoundingClientRect();
+            const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
+            const distanceFromCenter = Math.abs(rowCenterY - tableCenterY);
+            const maxDistance = viewportHeight / 2;
+            const opacity = 1 - (distanceFromCenter / maxDistance) * 0.7;
+            return Math.max(0.3, Math.min(1, opacity));
+          }
+          return 1;
+        });
+
+        setRowOpacities(newOpacities);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call to set opacities
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [tableData]);
+
+  return (
+    <div className="overflow-x-auto max-h-[500px] scrollbar-hide" ref={tableRef}>
+      <table className="w-full border-collapse">
+        <thead className="sticky top-0 z-10">
+          <tr className="bg-black">
+            <th className="w-1/2 text-left py-2 px-4"></th>
+            <th className="w-1/6 text-center py-2 px-4">Veloxforce solutions</th>
+            <th className="w-1/6 text-center py-2 px-4">Regular software</th>
+            <th className="w-1/6 text-center py-2 px-4">Hiring more employees</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.map((row, index) => (
+            <TableRow key={index} row={row} index={index} opacity={rowOpacities[index]} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
