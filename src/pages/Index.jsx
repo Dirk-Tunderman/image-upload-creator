@@ -91,18 +91,27 @@ const TableComponent = ({ tableData }) => {
     const handleScroll = () => {
       if (tableRef.current) {
         const tableRect = tableRef.current.getBoundingClientRect();
-        const tableCenterY = (tableRect.top + tableRect.bottom) / 2;
         const viewportHeight = window.innerHeight;
+        const viewportCenterY = window.innerHeight / 2;
 
         const newOpacities = tableData.map((_, index) => {
-          const rowElement = tableRef.current.querySelector(`tr:nth-child(${index + 1})`);
+          const rowElement = tableRef.current.querySelector(`tr:nth-child(${index + 2})`); // +2 to skip header
           if (rowElement) {
             const rowRect = rowElement.getBoundingClientRect();
             const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
-            const distanceFromCenter = Math.abs(rowCenterY - tableCenterY);
-            const maxDistance = viewportHeight / 2;
-            const opacity = 1 - (distanceFromCenter / maxDistance) * 0.7;
-            return Math.max(0.3, Math.min(1, opacity));
+            const distanceFromCenter = Math.abs(rowCenterY - viewportCenterY);
+            
+            if (distanceFromCenter < viewportHeight * 0.1) {
+              return 1; // 100% visible
+            } else if (distanceFromCenter < viewportHeight * 0.2) {
+              return 0.9; // 90% visible
+            } else if (distanceFromCenter < viewportHeight * 0.3) {
+              return 0.7; // 70% visible
+            } else if (distanceFromCenter < viewportHeight * 0.4) {
+              return 0.5; // 50% visible
+            } else {
+              return 0.2; // 20% visible
+            }
           }
           return 1;
         });
