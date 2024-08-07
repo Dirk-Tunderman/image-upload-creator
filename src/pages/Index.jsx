@@ -181,48 +181,52 @@ const tableData = [
 ];
 
 const CompanyProfile = ({ step, title, description, imageSrc }) => (
-  <div className="mb-8">
+  <div className="bg-gray-900 rounded-lg p-6">
     <p className="text-sm text-gray-400 mb-2">Step {step}</p>
     <h3 className="text-2xl font-bold mb-2 flex items-center">
       {title} <span className="ml-2">↗</span>
     </h3>
     <p className="text-gray-300 mb-4">{description}</p>
-    <div className="rounded-3xl overflow-hidden">
-      <img src={imageSrc} alt={title} className="w-full h-48 object-cover" />
+    <div className="rounded-lg overflow-hidden">
+      <img src={imageSrc} alt={title} className="w-full h-32 object-cover" />
     </div>
   </div>
 );
 
 const CompanyProfiles = () => (
   <div className="mt-16 bg-black text-white p-8 rounded-lg">
-    <div className="flex items-center justify-between mb-8">
-      <h2 className="text-4xl font-bold">
-        Company profiles
-        <br />
-        we work with
-      </h2>
-      <div className="rounded-full border border-white p-4">
-        <span className="text-2xl">✦</span>
+    <div className="flex mb-8">
+      <div className="w-2/5 pr-8">
+        <h2 className="text-4xl font-bold">
+          <span className="text-orange-500">Company</span> profiles
+          <br />
+          we work with
+        </h2>
+        <p className="mt-4 text-gray-300">
+          We collaborate with various company profiles to deliver tailored solutions that meet their unique needs and challenges.
+        </p>
+      </div>
+      <div className="w-3/5 space-y-6">
+        <CompanyProfile
+          step={1}
+          title="Veloxforce solutions"
+          description="Veloxforce solutions provides a competitive advantage by enabling unique, value-adding features that differentiate the company."
+          imageSrc="/placeholder.svg"
+        />
+        <CompanyProfile
+          step={2}
+          title="Regular software"
+          description="Cut through the clutter, grab your audience's attention, and turn passive onlookers into active participants."
+          imageSrc="/placeholder.svg"
+        />
+        <CompanyProfile
+          step={3}
+          title="Hiring more employees"
+          description="Cut through the clutter, grab your audience's attention, and turn passive onlookers into active participants."
+          imageSrc="/placeholder.svg"
+        />
       </div>
     </div>
-    <CompanyProfile
-      step={1}
-      title="Veloxforce solutions"
-      description="Veloxforce solutions provides a competitive advantage by enabling unique, value-adding features that differentiate the company."
-      imageSrc="/placeholder.svg"
-    />
-    <CompanyProfile
-      step={2}
-      title="Regular software"
-      description="Cut through the clutter, grab your audience's attention, and turn passive onlookers into active participants."
-      imageSrc="/placeholder.svg"
-    />
-    <CompanyProfile
-      step={3}
-      title="Hiring more employees"
-      description="Cut through the clutter, grab your audience's attention, and turn passive onlookers into active participants."
-      imageSrc="/placeholder.svg"
-    />
   </div>
 );
 
