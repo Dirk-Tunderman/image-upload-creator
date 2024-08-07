@@ -83,7 +83,7 @@ const TableRow = ({ row, index, opacity }) => {
 };
 
 const TableComponent = ({ tableData }) => {
-  const [rowOpacities, setRowOpacities] = useState(tableData.map(() => 1));
+  const [rowOpacities, setRowOpacities] = useState(tableData.map(() => 0));
   const tableRef = useRef(null);
 
   useEffect(() => {
@@ -98,25 +98,23 @@ const TableComponent = ({ tableData }) => {
 
         rowElements.forEach((rowElement, index) => {
           const rowRect = rowElement.getBoundingClientRect();
-          const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
-          const rowPosition = (rowCenterY - tableRect.top) / tableRect.height;
+          const rowTop = rowRect.top;
+          const rowBottom = rowRect.bottom;
 
+          // Calculate opacity based on row position in viewport
           let opacity;
-          if (rowPosition <= 0.2) {
-            opacity = rowPosition / 0.2;
-          } else if (rowPosition >= 0.8) {
-            opacity = (1 - rowPosition) / 0.2;
+          if (rowTop < 0) {
+            opacity = 0;
+          } else if (rowTop < viewportHeight && rowBottom > 0) {
+            const visibleHeight = Math.min(rowBottom, viewportHeight) - Math.max(rowTop, 0);
+            opacity = visibleHeight / rowRect.height;
           } else {
-            opacity = 1;
+            opacity = 0;
           }
 
-          // Adjust opacity based on position
-          if (opacity > 0.9) opacity = 1;
-          else if (opacity > 0.7) opacity = 0.9;
-          else if (opacity > 0.5) opacity = 0.7;
-          else if (opacity > 0.2) opacity = 0.5;
-          else if (opacity > 0) opacity = 0.2;
-          else opacity = 0;
+          // Adjust opacity for better visibility
+          opacity = Math.pow(opacity, 0.5); // Square root to make changes more gradual
+          opacity = Math.max(0.1, opacity); // Ensure a minimum opacity
 
           newOpacities[index] = opacity;
         });
