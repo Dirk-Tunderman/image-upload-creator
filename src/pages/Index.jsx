@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 const ServiceSection = ({ title, description, imageSrc, className, to }) => (
   <Link to={to} className={`relative overflow-hidden ${className} cursor-pointer`}>
@@ -65,14 +66,12 @@ const Index = () => {
   );
 };
 
-const TableRow = ({ row, index, opacity }) => {
+const TableRow = ({ row, index, isVisible }) => {
   return (
     <tr
-      className="border border-gray-700 bg-black"
-      style={{
-        opacity: opacity,
-        transition: "opacity 0.3s ease-in-out",
-      }}
+      className={`border border-gray-700 bg-black transition-opacity duration-500 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
     >
       <td className="py-2 px-4">{row.description}</td>
       <td className="text-center py-2 px-4">{renderCheckmark(row.veloxforce)}</td>
@@ -83,54 +82,13 @@ const TableRow = ({ row, index, opacity }) => {
 };
 
 const TableComponent = ({ tableData }) => {
-  const [rowOpacities, setRowOpacities] = useState(tableData.map(() => 0));
-  const tableRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (tableRef.current) {
-        const tableRect = tableRef.current.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const rowElements = tableRef.current.querySelectorAll('tbody tr');
-        const rowCount = rowElements.length;
-
-        const newOpacities = Array(rowCount).fill(0);
-
-        rowElements.forEach((rowElement, index) => {
-          const rowRect = rowElement.getBoundingClientRect();
-          const rowTop = rowRect.top;
-          const rowBottom = rowRect.bottom;
-
-          // Calculate opacity based on row position in viewport
-          let opacity;
-          if (rowTop < 0) {
-            opacity = 0;
-          } else if (rowTop < viewportHeight && rowBottom > 0) {
-            const visibleHeight = Math.min(rowBottom, viewportHeight) - Math.max(rowTop, 0);
-            opacity = visibleHeight / rowRect.height;
-          } else {
-            opacity = 0;
-          }
-
-          // Adjust opacity for better visibility
-          opacity = Math.pow(opacity, 0.5); // Square root to make changes more gradual
-          opacity = Math.max(0.1, opacity); // Ensure a minimum opacity
-
-          newOpacities[index] = opacity;
-        });
-
-        setRowOpacities(newOpacities);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call to set opacities
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [tableData]);
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+  });
 
   return (
-    <div className="overflow-x-auto max-h-[500px] scrollbar-hide" ref={tableRef}>
+    <div className="overflow-x-auto max-h-[500px] scrollbar-hide" ref={ref}>
       <table className="w-full border-collapse">
         <thead className="sticky top-0 z-10">
           <tr className="bg-black">
@@ -142,7 +100,7 @@ const TableComponent = ({ tableData }) => {
         </thead>
         <tbody>
           {tableData.map((row, index) => (
-            <TableRow key={index} row={row} index={index} opacity={rowOpacities[index]} />
+            <TableRow key={index} row={row} index={index} isVisible={inView} />
           ))}
         </tbody>
       </table>
