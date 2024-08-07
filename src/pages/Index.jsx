@@ -84,16 +84,7 @@ const TableRow = ({ row, index, opacity }) => {
 };
 
 const TableComponent = ({ tableData }) => {
-  const [rowOpacities, setRowOpacities] = useState(() => {
-    return tableData.map((_, index) => {
-      if (index === 0) return 1;
-      if (index === 1) return 0.9;
-      if (index === 2) return 0.7;
-      if (index === 3) return 0.5;
-      if (index === 4) return 0.2;
-      return 0;
-    });
-  });
+  const [rowOpacities, setRowOpacities] = useState(tableData.map(() => 1));
   const tableRef = useRef(null);
 
   useEffect(() => {
@@ -101,39 +92,44 @@ const TableComponent = ({ tableData }) => {
       if (tableRef.current) {
         const tableRect = tableRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
+        const viewportCenterY = viewportHeight / 2;
 
         const newOpacities = tableData.map((_, index) => {
+          // Always keep first and last rows fully visible
+          if (index === 0 || index === tableData.length - 1) {
+            return 1;
+          }
+
           const rowElement = tableRef.current.querySelector(`tr:nth-child(${index + 2})`); // +2 to skip header
           if (rowElement) {
             const rowRect = rowElement.getBoundingClientRect();
             const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
-            const distanceFromTop = rowCenterY - tableRect.top;
+            const distanceFromCenter = Math.abs(rowCenterY - viewportCenterY);
             
-            // Calculate opacity based on distance from top
-            const maxDistance = viewportHeight;
-            let opacity = 1 - (distanceFromTop / maxDistance);
+            // Calculate opacity based on distance from center
+            const maxDistance = viewportHeight / 2;
+            let opacity = 1 - (distanceFromCenter / maxDistance);
             
-            // Clamp opacity between 0 and 1
-            opacity = Math.max(0, Math.min(1, opacity));
+            // Clamp opacity between 0.5 and 1
+            opacity = Math.max(0.5, Math.min(1, opacity));
             
             return opacity;
           }
-          return 0;
+          return 1;
         });
 
         setRowOpacities(newOpacities);
       }
     };
 
-    const tableContainer = tableRef.current.closest('.overflow-x-auto');
-    tableContainer.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
     handleScroll(); // Initial call to set opacities
 
-    return () => tableContainer.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [tableData]);
 
   return (
-    <div className="overflow-y-auto max-h-[500px] scrollbar-hide" ref={tableRef}>
+    <div className="overflow-x-auto max-h-[500px] scrollbar-hide" ref={tableRef}>
       <table className="w-full border-collapse">
         <thead className="sticky top-0 z-10">
           <tr className="bg-black">
