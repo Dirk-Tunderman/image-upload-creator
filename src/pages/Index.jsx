@@ -107,9 +107,16 @@ const TableComponent = ({ tableData }) => {
             }
             
             // Calculate opacity based on distance from center
-            const maxDistance = viewportHeight / 2;
-            const opacity = 1 - (distanceFromCenter / maxDistance);
-            return Math.max(0.2, Math.min(1, opacity)); // Clamp between 0.2 and 1
+            const maxDistance = viewportHeight / 4; // Reduced from viewportHeight / 2
+            let opacity = 1 - (distanceFromCenter / maxDistance);
+            
+            // Adjust opacity values
+            if (opacity > 0.9) opacity = 1;
+            else if (opacity > 0.7) opacity = 0.9;
+            else if (opacity > 0.5) opacity = 0.7;
+            else opacity = 0.5;
+            
+            return opacity;
           }
           return 1;
         });
