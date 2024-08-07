@@ -89,25 +89,24 @@ const TableComponent = ({ tableData }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (tableRef.current) {
-        const tableContainer = tableRef.current;
-        const containerHeight = tableContainer.clientHeight;
-        const rowElements = tableContainer.querySelectorAll('tbody tr');
+        const tableRect = tableRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const rowElements = tableRef.current.querySelectorAll('tbody tr');
         const rowCount = rowElements.length;
 
         const newOpacities = Array(rowCount).fill(0);
 
         rowElements.forEach((rowElement, index) => {
           const rowRect = rowElement.getBoundingClientRect();
-          const containerRect = tableContainer.getBoundingClientRect();
-          const rowTop = rowRect.top - containerRect.top;
-          const rowBottom = rowRect.bottom - containerRect.top;
+          const rowTop = rowRect.top;
+          const rowBottom = rowRect.bottom;
 
-          // Calculate opacity based on row position in the container
+          // Calculate opacity based on row position in viewport
           let opacity;
           if (rowTop < 0) {
             opacity = 0;
-          } else if (rowTop < containerHeight && rowBottom > 0) {
-            const visibleHeight = Math.min(rowBottom, containerHeight) - Math.max(rowTop, 0);
+          } else if (rowTop < viewportHeight && rowBottom > 0) {
+            const visibleHeight = Math.min(rowBottom, viewportHeight) - Math.max(rowTop, 0);
             opacity = visibleHeight / rowRect.height;
           } else {
             opacity = 0;
@@ -124,17 +123,14 @@ const TableComponent = ({ tableData }) => {
       }
     };
 
-    const tableContainer = tableRef.current;
-    if (tableContainer) {
-      tableContainer.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial call to set opacities
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call to set opacities
 
-      return () => tableContainer.removeEventListener('scroll', handleScroll);
-    }
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [tableData]);
 
   return (
-    <div className="overflow-x-auto max-h-[500px] scrollbar-hide" ref={tableRef} onScroll={(e) => e.stopPropagation()}>
+    <div className="overflow-x-auto max-h-[500px] scrollbar-hide" ref={tableRef}>
       <table className="w-full border-collapse">
         <thead className="sticky top-0 z-10">
           <tr className="bg-black">
