@@ -56,12 +56,13 @@ const Index = () => {
           </Link>
         </div>
       </div>
-    <div className="mt-16 ">
-          <div className="bg-black text-white rounded-lg overflow-hidden ">
-            <h2 className="text-4xl font-bold p-8 sticky top-0 bg-black z-20">What to choose?</h2>
-            <TableComponent tableData={tableData} />
-          </div>
+      <div className="mt-16">
+        <div className="bg-black text-white rounded-lg overflow-hidden">
+          <h2 className="text-4xl font-bold p-8 sticky top-0 bg-black z-20">What to choose?</h2>
+          <TableComponent tableData={tableData} />
         </div>
+      </div>
+      <CompanyProfiles />
     </div>
   );
 };
@@ -178,5 +179,51 @@ const tableData = [
     hiring: false,
   },
 ];
+
+const CompanyProfile = ({ step, title, description, imageSrc }) => (
+  <div className="mb-8">
+    <p className="text-sm text-gray-400 mb-2">Step {step}</p>
+    <h3 className="text-2xl font-bold mb-2 flex items-center">
+      {title} <span className="ml-2">↗</span>
+    </h3>
+    <p className="text-gray-300 mb-4">{description}</p>
+    <div className="rounded-3xl overflow-hidden">
+      <img src={imageSrc} alt={title} className="w-full h-48 object-cover" />
+    </div>
+  </div>
+);
+
+const CompanyProfiles = () => (
+  <div className="mt-16 bg-black text-white p-8 rounded-lg">
+    <div className="flex items-center justify-between mb-8">
+      <h2 className="text-4xl font-bold">
+        Company profiles
+        <br />
+        we work with
+      </h2>
+      <div className="rounded-full border border-white p-4">
+        <span className="text-2xl">✦</span>
+      </div>
+    </div>
+    <CompanyProfile
+      step={1}
+      title="Veloxforce solutions"
+      description="Veloxforce solutions provides a competitive advantage by enabling unique, value-adding features that differentiate the company."
+      imageSrc="/placeholder.svg"
+    />
+    <CompanyProfile
+      step={2}
+      title="Regular software"
+      description="Cut through the clutter, grab your audience's attention, and turn passive onlookers into active participants."
+      imageSrc="/placeholder.svg"
+    />
+    <CompanyProfile
+      step={3}
+      title="Hiring more employees"
+      description="Cut through the clutter, grab your audience's attention, and turn passive onlookers into active participants."
+      imageSrc="/placeholder.svg"
+    />
+  </div>
+);
 
 export default Index;
