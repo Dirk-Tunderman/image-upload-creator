@@ -125,10 +125,16 @@ const TableComponent = ({ tableData }) => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call to set opacities
+    const cleanup = () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial call to set opacities
+    }
+
+    return cleanup;
   }, [tableData]);
 
   return (
