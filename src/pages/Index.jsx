@@ -22,14 +22,16 @@ const ServiceSection = ({ title, description, imageSrc, className, to, direction
       variants={variants}
       transition={{ duration: 0.5 }}
     >
-  <Link to={to} className={`relative overflow-hidden ${className} cursor-pointer`}>
-    <img src={imageSrc} alt={title} className="w-full h-full object-cover absolute inset-0" />
-    <div className="relative z-10 p-8 h-full flex flex-col">
-      <h3 className="text-3xl font-bold mb-4">{title}</h3>
-      <p className="text-lg">{description}</p>
-    </div>
-  </Link>
-);
+      <Link to={to} className={`relative overflow-hidden ${className} cursor-pointer`}>
+        <img src={imageSrc} alt={title} className="w-full h-full object-cover absolute inset-0" />
+        <div className="relative z-10 p-8 h-full flex flex-col">
+          <h3 className="text-3xl font-bold mb-4">{title}</h3>
+          <p className="text-lg">{description}</p>
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
 
 const Index = () => {
   return (
