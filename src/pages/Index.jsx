@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
@@ -92,49 +91,44 @@ const TableComponent = ({ tableData }) => {
       if (tableRef.current) {
         const tableRect = tableRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        const viewportCenterY = viewportHeight / 2;
+        const rowElements = tableRef.current.querySelectorAll('tbody tr');
+        const rowCount = rowElements.length;
 
-        const newOpacities = tableData.map((_, index) => {
-          const rowElement = tableRef.current.querySelector(`tr:nth-child(${index + 2})`); // +2 to skip header
-          if (rowElement) {
-            const rowRect = rowElement.getBoundingClientRect();
-            const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
-            const distanceFromCenter = Math.abs(rowCenterY - viewportCenterY);
-            
-            // Make the last row always fully visible
-            if (index === tableData.length - 1) {
-              return 1;
-            }
-            
-            // Calculate opacity based on distance from center
-            const maxDistance = viewportHeight / 4; // Reduced from viewportHeight / 2
-            let opacity = 1 - (distanceFromCenter / maxDistance);
-            
-            // Adjust opacity values
-            if (opacity > 0.9) opacity = 1;
-            else if (opacity > 0.7) opacity = 0.9;
-            else if (opacity > 0.5) opacity = 0.7;
-            else opacity = 0.5;
-            
-            return opacity;
+        const newOpacities = Array(rowCount).fill(0);
+
+        rowElements.forEach((rowElement, index) => {
+          const rowRect = rowElement.getBoundingClientRect();
+          const rowCenterY = (rowRect.top + rowRect.bottom) / 2;
+          const rowPosition = (rowCenterY - tableRect.top) / tableRect.height;
+
+          let opacity;
+          if (rowPosition <= 0.2) {
+            opacity = rowPosition / 0.2;
+          } else if (rowPosition >= 0.8) {
+            opacity = (1 - rowPosition) / 0.2;
+          } else {
+            opacity = 1;
           }
-          return 1;
+
+          // Adjust opacity based on position
+          if (opacity > 0.9) opacity = 1;
+          else if (opacity > 0.7) opacity = 0.9;
+          else if (opacity > 0.5) opacity = 0.7;
+          else if (opacity > 0.2) opacity = 0.5;
+          else if (opacity > 0) opacity = 0.2;
+          else opacity = 0;
+
+          newOpacities[index] = opacity;
         });
 
         setRowOpacities(newOpacities);
       }
     };
 
-    const cleanup = () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call to set opacities
 
-    if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', handleScroll);
-      handleScroll(); // Initial call to set opacities
-    }
-
-    return cleanup;
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [tableData]);
 
   return (
