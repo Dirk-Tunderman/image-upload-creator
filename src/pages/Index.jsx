@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 const ServiceSection = ({ title, description, imageSrc, className, to }) => (
   <Link to={to} className={`relative overflow-hidden ${className} cursor-pointer`}>
@@ -70,12 +71,7 @@ const Index = () => {
                 </thead>
                 <tbody>
                   {tableData.map((row, index) => (
-                    <tr key={index}>
-                      <td className="py-2 px-4 border border-gray-700 bg-black">{row.description}</td>
-                      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.veloxforce)}</td>
-                      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.regular)}</td>
-                      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.hiring)}</td>
-                    </tr>
+                    <TableRow key={index} row={row} index={index} />
                   ))}
                 </tbody>
               </table>
@@ -83,6 +79,51 @@ const Index = () => {
           </div>
         </div>
     </div>
+  );
+};
+
+const useVisibilityHook = (ref) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref]);
+
+  return isVisible;
+};
+
+const TableRow = ({ row, index }) => {
+  const rowRef = useRef(null);
+  const isVisible = useVisibilityHook(rowRef);
+
+  return (
+    <tr
+      ref={rowRef}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.5s ease-in-out",
+      }}
+    >
+      <td className="py-2 px-4 border border-gray-700 bg-black">{row.description}</td>
+      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.veloxforce)}</td>
+      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.regular)}</td>
+      <td className="text-center py-2 px-4 border border-gray-700 bg-black">{renderCheckmark(row.hiring)}</td>
+    </tr>
   );
 };
 
